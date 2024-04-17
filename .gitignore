@@ -1,1 +1,9 @@
+## Cargo / Rust artifacts
 /target
+
+## Developer cruft
+/dev
+
+## Vim (BTW™) artifacts
+*.swp
+*.swo
