@@ -1,0 +1,37 @@
+[package]
+name = "twitter-archive"
+version = "0.0.1"
+authors = ["S0AndS0 <strangerthanbland@gmail.com>"]
+edition = "2021"
+license = "AGPL-3.0"
+description = "Serde structs, deserialize, and serialize definitions for Twitter archived data"
+readme = ".github/README.md"
+homepage = "https://github.com/rust-utilities/twitter-archive"
+repository = "https://github.com/rust-utilities/twitter-archive"
+keywords = [ "json", "serde", "twitter" ]
+categories = [ "data-structures", "encoding", "parsing", "text-processing" ]
+
+# For publishing
+exclude = [ "*" ]
+
+include = [
+  "src/**/*.rs",
+  ".github/README.md",
+  "CHANGELOG.md",
+  "Cargo.toml",
+  "LICENSE",
+]
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+chrono = { version = "0.4", features = ["serde"] }
+derive_more = { version = "0.99.17", features = ["display"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
+
+[dev-dependencies]
+chrono = { version = "0.4", features = ["serde"]}
+clap = { version = "4.3.0", features = ["derive"] }
+clap_complete = "4.3.0"
+regex = "1.10.4"
+zip = { version = "0.6.6" }

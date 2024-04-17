@@ -1,0 +1,45 @@
+name: Test
+description: Do the CI/CD things for Rust with various Cargo commands
+
+on:
+  pull_request:
+    branches: [ $default-branch ]
+
+  push:
+    branches: [ $default-branch ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build_and_test:
+    name: Rust project - latest
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        toolchain:
+          - stable
+          - beta
+          - nightly
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update and set tool chain -> ${{ matrix.toolchain }}
+        run: rustup update ${{ matrix.toolchain }} && rustup default ${{ matrix.toolchain }}
+
+      - name: Build
+        run: cargo build --verbose
+
+      - name: Test
+        run: cargo test --verbose
+
+      - name: Lint
+        run: cargo clippy --verbose
+
+
+##
+# Attributions:
+#   - https://doc.rust-lang.org/cargo/guide/continuous-integration.html
+#   - https://github.com/actions/starter-workflows/blob/main/ci/rust.yml
